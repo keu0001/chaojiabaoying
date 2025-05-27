@@ -206,7 +206,44 @@ body {
   }
 }
 
-/* 保证卡片背景色一致 */
+/* 强制全端统一浅色风格，覆盖暗色模式 */
+html, body {
+  background: #1C2023 !important;
+  color: #575853 !important;
+}
 .flat-card, .responsive-card {
   background: #D9D2CD !important;
+  color: #575853 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.flat-btn {
+  background: #1C2023 !important;
+  color: #D9D2CD !important;
+  border: 1px solid #575853 !important;
+}
+.flat-btn:active, .flat-btn:hover {
+  background: #575853 !important;
+  color: #D9D2CD !important;
+}
+
+/* 移除暗色模式影响 */
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: #1C2023 !important;
+    color: #575853 !important;
+  }
+  .flat-card, .responsive-card {
+    background: #D9D2CD !important;
+    color: #575853 !important;
+  }
+  .flat-btn {
+    background: #1C2023 !important;
+    color: #D9D2CD !important;
+    border: 1px solid #575853 !important;
+  }
+  .flat-btn:active, .flat-btn:hover {
+    background: #575853 !important;
+    color: #D9D2CD !important;
+  }
 }
