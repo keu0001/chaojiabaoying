@@ -91,11 +91,10 @@ export default function Home() {
     try {
       const stylePrompt = STYLE_PROMPT[style] || '';
       const prompt = `${stylePrompt}\n请用${style}风格，针对以下内容输出3条高水平的吵架回复，每条单独分行：${input}`;
-      const res = await fetch("https://api.ephone.ai/v1/chat/completions", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer sk-ncR0jBaWbanOCpOcpRdS1sIoMbpamrbkw9AGUMXqW3IoQhq8",
         },
         body: JSON.stringify({
           model: "gpt-4o",
