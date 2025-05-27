@@ -158,31 +158,36 @@ export default function Home() {
           <div className="reply-divider" />
         </div>
         {replies.length > 0 && (
-          <div
-            className="flat-card"
-            style={{
-              fontFamily,
-              background: '#D9D2CD',
-              maxHeight: '28vh',
-              minHeight: '60px',
-              overflowY: 'auto',
-              fontSize: '0.98rem',
-              marginBottom: '0.5em',
-              color: '#575853',
-            }}
-          >
-            <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
-              吵架回复
+          <>
+            <div
+              className="flat-card"
+              style={{
+                fontFamily,
+                background: '#D9D2CD',
+                maxHeight: '28vh',
+                minHeight: '60px',
+                overflowY: 'auto',
+                fontSize: '0.98rem',
+                marginBottom: '0.5em',
+                color: '#575853',
+              }}
+            >
+              <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
+                吵架回复
+              </div>
+              <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
+                {replies.map((r, i) => {
+                  const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["\""]/g, '').trim();
+                  return (
+                    <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
+                  );
+                })}
+              </ol>
             </div>
-            <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
-              {replies.map((r, i) => {
-                const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["""]/g, '').trim();
-                return (
-                  <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
-                );
-              })}
-            </ol>
-          </div>
+            <div className="reply-divider-wrapper">
+              <div className="reply-divider" />
+            </div>
+          </>
         )}
         <div className="mb-2">
           <div className="font-semibold mb-1 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
