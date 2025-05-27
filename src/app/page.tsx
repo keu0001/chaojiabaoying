@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from 'next/image';
 
 const STYLES = [
   "林黛玉",
@@ -108,12 +109,12 @@ export default function Home() {
       if (!res.ok) throw new Error("API 请求失败");
       const data = await res.json();
       // 解析回复
-      let text = data.choices?.[0]?.message?.content || "";
+      const text = data.choices?.[0]?.message?.content || "";
       let lines = text.split(/\n+/).filter(Boolean);
       if (lines.length < 3) lines = text.split(/[\d\.\-\•]+/).filter(Boolean);
       setReplies(lines.slice(0, 3));
-    } catch (e: any) {
-      setError(e.message || "出错了");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "出错了");
     } finally {
       setLoading(false);
     }
@@ -212,12 +213,12 @@ export default function Home() {
                     justifyContent: 'center',
                   }}
                 >
-                  <img
+                  <Image
                     src={meta.img}
                     alt={meta.name}
+                    width={56}
+                    height={56}
                     style={{
-                      width: '100%',
-                      height: '100%',
                       objectFit: 'cover',
                       border: 'none',
                       boxShadow: 'none',
