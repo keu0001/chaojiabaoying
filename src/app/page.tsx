@@ -121,32 +121,26 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center justify-between p-0"
+      className="min-h-screen h-screen flex flex-col items-center justify-center p-2"
       style={{
         fontFamily,
         minHeight: '100vh',
+        height: '100vh',
         background: '#1C2023',
         color: '#575853',
       }}
     >
-      <header style={{ width: '100%', padding: '2.2rem 0 1.2rem 0', textAlign: 'center', background: 'transparent', position: 'sticky', top: 0, zIndex: 10 }}>
-        <h1 className="text-3xl sm:text-4xl font-extrabold" style={{ color: '#E7E2DD', fontFamily }}>吵架包赢</h1>
-      </header>
-      <main
-        className="flat-card flex flex-col gap-3 sm:gap-5"
+      <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-8" style={{ color: '#E7E2DD', fontFamily }}>吵架包赢</h1>
+      <div
+        className="flat-card w-full flex flex-col gap-3 sm:gap-5 responsive-card"
         style={{
           fontFamily,
-          width: '100vw',
-          maxWidth: 480,
-          flex: 1,
+          maxWidth: '480px',
+          width: '100%',
           boxSizing: 'border-box',
           background: '#D9D2CD',
           color: '#575853',
-          borderRadius: 0,
-          minHeight: 'calc(100vh - 120px)',
-          padding: '1.2rem 0.8rem 6.5rem 0.8rem',
-          margin: 0,
-          justifyContent: 'flex-start',
+          padding: '1.5rem',
         }}
       >
         <label className="text-base sm:text-lg font-semibold mb-1" style={{ color: '#575853', fontFamily }}>
@@ -160,18 +154,42 @@ export default function Home() {
           placeholder="请输入对方说的话..."
           style={{ fontFamily, minHeight: 48, maxHeight: 100, fontSize: '1rem', resize: 'none', background: '#D9D2CD', color: '#575853', border: '1px solid #575853' }}
         />
+        {replies.length > 0 && (
+          <div
+            className="flat-card"
+            style={{
+              fontFamily,
+              background: '#D9D2CD',
+              maxHeight: '28vh',
+              minHeight: '60px',
+              overflowY: 'auto',
+              fontSize: '0.98rem',
+              marginBottom: '0.5em',
+              color: '#575853',
+            }}
+          >
+            <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
+              吵架回复
+            </div>
+            <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
+              {replies.map((r, i) => {
+                const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["""]/g, '').trim();
+                return (
+                  <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
+                );
+              })}
+            </ol>
+          </div>
+        )}
         <div className="mb-2">
           <div className="font-semibold mb-1 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
             选吵架风格
           </div>
-          <div
-            className="flex flex-wrap justify-center items-end w-full gap-2"
-            style={{ fontFamily, flexWrap: 'wrap', rowGap: 12, columnGap: 8 }}
-          >
+          <div className="flex gap-3 justify-center items-end w-full style-scroll-x" style={{ fontFamily }}>
             {STYLE_META.map(meta => (
               <div
                 key={meta.name}
-                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 60, width: '22vw', maxWidth: 90, cursor: 'pointer', marginBottom: 8 }}
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 60, cursor: 'pointer' }}
                 onClick={() => setStyle(meta.name)}
               >
                 <div
@@ -217,40 +235,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {replies.length > 0 && (
-          <div
-            className="flat-card"
-            style={{
-              fontFamily,
-              background: '#D9D2CD',
-              maxHeight: '28vh',
-              minHeight: '60px',
-              overflowY: 'auto',
-              fontSize: '0.98rem',
-              marginBottom: '0.5em',
-              color: '#575853',
-            }}
-          >
-            <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
-              吵架回复
-            </div>
-            <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
-              {replies.map((r, i) => {
-                const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["\""]/g, '').trim();
-                return (
-                  <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
-                );
-              })}
-            </ol>
-          </div>
-        )}
-        {error && (
-          <div className="text-red-500 mt-2 text-center text-sm" style={{ fontFamily, color: '#6E6B67' }}>
-            {error}
-          </div>
-        )}
-      </main>
-      <footer style={{ width: '100vw', position: 'fixed', left: 0, bottom: 0, zIndex: 20, background: 'rgba(220,220,220,0.95)', padding: '0.8rem 0.8rem 1.2rem 0.8rem', boxSizing: 'border-box', borderTop: '1px solid #eee' }}>
         <button
           className="flat-btn mt-2 w-full"
           onClick={handleFight}
@@ -260,15 +244,18 @@ export default function Home() {
             color: '#D9D2CD',
             fontFamily,
             fontSize: '1.08rem',
+            marginTop: '0.5em',
             border: '1px solid #575853',
-            borderRadius: 16,
-            width: '100%',
-            minHeight: 48,
           }}
         >
           {loading ? "生成中..." : "开始吵架"}
         </button>
-      </footer>
+        {error && (
+          <div className="text-red-500 mt-2 text-center text-sm" style={{ fontFamily, color: '#6E6B67' }}>
+            {error}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
