@@ -131,10 +131,6 @@ export default function Home() {
         minHeight: '100vh',
         height: '100vh',
         background: '#1C2023',
-        backgroundImage: `url('${bgImg}')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'contain',
         color: '#575853',
       }}
     >
@@ -211,6 +207,7 @@ export default function Home() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    background: '#fff',
                   }}
                 >
                   <Image
@@ -219,9 +216,10 @@ export default function Home() {
                     width={56}
                     height={56}
                     style={{
+                      width: 56,
+                      height: 56,
                       objectFit: 'cover',
-                      border: 'none',
-                      boxShadow: 'none',
+                      borderRadius: '50%',
                       display: 'block',
                     }}
                   />
