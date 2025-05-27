@@ -185,7 +185,13 @@ export default function Home() {
           <div className="font-semibold mb-1 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
             选吵架风格
           </div>
-          <div className="flex gap-3 justify-center items-end w-full style-scroll-x" style={{ fontFamily }}>
+          <div
+            className={
+              "style-select-area flex gap-3 justify-center items-end w-full " +
+              "style-select-responsive"
+            }
+            style={{ fontFamily }}
+          >
             {STYLE_META.map(meta => (
               <div
                 key={meta.name}

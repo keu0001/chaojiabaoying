@@ -159,6 +159,12 @@ body {
   scrollbar-color: #D9D2CD #fff;
 }
 
+/* 风格选择区域响应式布局 */
+.style-select-area {
+  flex-wrap: wrap;
+  overflow-x: visible;
+}
+
 @media (max-width: 600px) {
   .responsive-card {
     max-width: 98vw !important;
@@ -179,4 +185,16 @@ body {
     min-width: 44px !important;
     min-height: 44px !important;
   }
+  .style-select-area {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #D9D2CD #fff;
+  }
+}
+
+/* 保证卡片背景色一致 */
+.flat-card, .responsive-card {
+  background: #D9D2CD !important;
 }
