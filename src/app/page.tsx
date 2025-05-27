@@ -155,6 +155,11 @@ export default function Home() {
           style={{ fontFamily, minHeight: 48, maxHeight: 100, fontSize: '1rem', resize: 'none', background: '#D9D2CD', color: '#575853', border: '1px solid #575853' }}
         />
         {replies.length > 0 && (
+          <div className="reply-divider-wrapper">
+            <div className="reply-divider" />
+          </div>
+        )}
+        {replies.length > 0 && (
           <div
             className="flat-card"
             style={{

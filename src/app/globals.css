@@ -247,3 +247,30 @@ html, body {
     color: #D9D2CD !important;
   }
 }
+
+.reply-divider-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5em 0 0.7em 0;
+}
+.reply-divider {
+  width: 80%;
+  height: 6px;
+  border-radius: 6px;
+  background: #D9D2CD;
+  box-shadow: 0 -8px 16px -8px rgba(44,44,44,0.18);
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .reply-divider {
+    width: 70%;
+    height: 5px;
+    border-radius: 5px;
+  }
+  .reply-divider-wrapper {
+    margin: 0.3em 0 0.5em 0;
+  }
+}
