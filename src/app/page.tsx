@@ -121,7 +121,7 @@ export default function Home() {
   }
 
   // 固定背景图片，不随风格切换
-  const bgImg = '/bg-character.png';
+  const bgImg = '/bg-lindaiyu.jpg';
 
   return (
     <div
