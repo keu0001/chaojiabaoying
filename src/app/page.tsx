@@ -120,9 +120,6 @@ export default function Home() {
     }
   }
 
-  // 固定背景图片，不随风格切换
-  const bgImg = '/bg-lindaiyu.jpg';
-
   return (
     <div
       className="min-h-screen h-screen flex flex-col items-center justify-center p-2"
