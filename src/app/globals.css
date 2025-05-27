@@ -253,24 +253,25 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5em 0 0.7em 0;
+  margin: 0.8em 0 1em 0;
 }
 .reply-divider {
   width: 80%;
-  height: 6px;
-  border-radius: 6px;
-  background: #D9D2CD;
-  box-shadow: 0 -8px 16px -8px rgba(44,44,44,0.18);
+  height: 8px;
+  border-radius: 8px;
+  background: #b0a89f;
+  box-shadow: 0 -10px 24px -8px rgba(44,44,44,0.28);
   position: relative;
   z-index: 2;
+  opacity: 0.95;
 }
 @media (max-width: 600px) {
   .reply-divider {
     width: 70%;
-    height: 5px;
-    border-radius: 5px;
+    height: 7px;
+    border-radius: 7px;
   }
   .reply-divider-wrapper {
-    margin: 0.3em 0 0.5em 0;
+    margin: 0.5em 0 0.8em 0;
   }
 }
