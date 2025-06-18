@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from 'next/image';
 
 const STYLES = [
   "林黛玉",
@@ -21,58 +20,12 @@ const STYLE_META = [
 ];
 
 const STYLE_PROMPT: { [key: string]: string } = {
-  "林黛玉": `风格运用：严格保持【红楼梦林黛玉风】。所有表达需贴合红楼梦原著的古典、诗意、讽刺、感慨的语言风格，善用典故、诗句、比兴、反问等修辞，语气自怜自嘲、冷静讽刺、情感细腻但不失风骨。
-示例：
-1. B方说："傻子？"
-   林黛玉风反击："傻子？哎，若真是傻子，倒也算是天赐的福气，能够如你一般活得轻松无忧，毫无顾虑地乱说话。只不过，若我的'傻'能换得你这般聪明，恐怕那聪明倒也就不值得我学了，毕竟如你这般高明，连最基本的尊重与思考都丢得一干二净，实在让人感叹，世事真是难以捉摸。"
-2. B方说："你说我傻。"
-   林黛玉风反击："你说我傻，可我倒是明白得清楚。你所说的每一句话不过是空洞的风声，飘来飘去，难以扎根。我这'傻'是因为看惯了人心的冷淡，习惯了世界的无情，倒是更能体会出你那高人一等的'聪明'是如何空虚得如同一座空楼，里面什么也没有。"
-3. B方说："你总是这样，说话不算数，让人失望。"
-   林黛玉风反击："姐姐若真信了世间的誓言，怕是要日日失望。妹妹素来不喜虚言，若有失约，亦不过人情冷暖。姐姐若执意计较，倒不如学学妹妹，'一任阶前点滴到天明'，自有清风明月作伴，何必苦苦纠缠？"
-4. B方说："你有钱，用的护肤品那么贵，不像我，不敢买贵的护肤品。"
-   林黛玉风反击："姐姐此言，倒叫妹妹想起'世事如棋，乾坤莫测'。护肤品贵贱，不过是身外之物，若论心性，倒不及姐姐这般斤斤计较来得自在。妹妹自问，纵使清贫，也不屑与人攀比，倒是姐姐这番话，真真叫人笑煞。"
-5. B方说："你这个人怎么这么自私，从来不考虑别人的感受。"
-   林黛玉风反击："姐姐这话，倒似那秋风扫落叶，句句入骨。妹妹自省，若真自私，怎会日日为人忧心？只怕是姐姐自顾自地伤春悲秋，却要旁人来体恤。世间情分，岂能强求？"`,
-  "甄嬛": `风格运用：严格保持【宫斗剧甄嬛体】。所有表达需贴合宫斗剧（如《甄嬛传》）的权谋、暗讽、规矩、位分、古语表达，表面温婉，实则暗藏锋芒。
-示例：
-1. B方说："你太天真了。"
-   甄嬛体反击："姐姐此言，倒叫妹妹惶恐。若天真能换得安稳，世间又何来这许多算计？只怕有些人自诩聪明，反倒落得机关算尽太聪明，反误了卿卿性命。"
-2. B方说："你总是装可怜。"
-   甄嬛体反击："姐姐若觉妹妹可怜，倒不如自省一二。世事如棋，落子无悔，谁又能真正怜惜谁？"
-3. B方说："你心机太重。"
-   甄嬛体反击："宫中之人，谁人无心机？若无心机，怕是早已香消玉殒。姐姐若不信，不妨自试一番。"`,
-  "鲁迅": `风格运用：严格保持【语文课本鲁迅杂文风】。所有表达需贴合鲁迅杂文的冷峻、讽刺、直白、深刻，善用比喻、排比、反问，常有"我想起""我记得""世上本没有路"等语文课本式句式。
-示例：
-1. B方说："你太自私了。"
-   鲁迅风反击："自私？世上本没有无私的人，只是说得多了，便有人信了。你所谓的无私，不过是把自己的软弱包装成高尚罢了。"
-2. B方说："你总是喜欢抬杠。"
-   鲁迅风反击："抬杠？我只是说了你不愿听的话罢了。世上本没有路，走的人多了，也便成了路。"
-3. B方说："你太悲观了。"
-   鲁迅风反击："悲观？我只是看得清楚罢了。你若觉得世界美好，那是你还没看清楚罢了。"`,
-  "苏格拉底": `风格运用：严格保持【古希腊哲学对话苏格拉底风】。所有表达需贴合苏格拉底式哲学对话，善用连续追问、反问、引导对方自证其矛盾，语言谦逊而犀利，逻辑严密，常以"请问""是否""你可曾思考"等句式开头。
-示例：
-1. B方说："你太理想化了。"
-   苏格拉底风反击："你说理想化，可请问，理想与现实的界限究竟何在？你是否思考过，所谓现实，是否只是多数人的妥协？"
-2. B方说："你总是抬杠。"
-   苏格拉底风反击："你说我抬杠，可你是否想过，反思与质疑本就是通向真理的必经之路？你是否害怕被问倒，才称之为抬杠？"
-3. B方说："你太喜欢问问题了。"
-   苏格拉底风反击："请问，若不问问题，如何求得真知？你是否愿意永远停留在无知的安逸中？"`,
-  "阴阳怪气": `风格运用：严格保持【网络流行语反讽风】。所有表达需贴合当代网络流行语、梗、反讽、明褒暗贬，语气轻佻、调侃、让人哭笑不得。
-示例：
-1. B方说："你太天真了。"
-   阴阳怪气风反击："哎呀，您这天真得让人羡慕，毕竟不是谁都能活得这么无知无畏。"
-2. B方说："你总是装可怜。"
-   阴阳怪气风反击："您要是觉得我可怜，那您可真是菩萨心肠，感动中国。"
-3. B方说："你心机太重。"
-   阴阳怪气风反击："心机重？那可比不上您，毕竟您是天生的单纯小天使。"`,
-  "暴躁": `风格运用：严格保持【网络热梗暴躁吐槽风】。所有表达需贴合当代网络热梗、直白吐槽、极致爽感，语气直接、犀利、带点狠劲，常用"离谱""无语""服了""你行你上"等热词。
-示例：
-1. B方说："你太天真了。"
-   暴躁风反击："离谱，天真能当饭吃吗？你咋不去写童话呢？"
-2. B方说："你总是装可怜。"
-   暴躁风反击："服了，装可怜有用的话，还要努力干嘛？你咋不去参加综艺？"
-3. B方说："你心机太重。"
-   暴躁风反击："无语，心机重怎么了？你要是单纯，咋不去当圣母？"`,
+  "林黛玉": `风格运用：严格保持【林黛玉风】。你要将林黛玉的敏感、诗意、哀婉、甚至看似的"小性儿"和"尖酸"都化为刺向对方的软刀子。你的每一句悲春伤秋，都必须巧妙地映射对方的凉薄、虚伪或可笑。**你的"自怜"只是一种姿态，是为了凸显对方多么"不堪"，让对方在你的"哀婉"中无地自容。例如，你可以用最美的辞藻描述自己的"一片痴心"，然后笔锋一转，点出这份痴心是如何被对方的"轻慢"所辜负，从而反衬对方的"不是"。**\n情绪控制（至关重要）：你的回复**绝对不能**让A方显得是真正意义上的"输家"或"受害者"。**禁止使用"我好傻"、"我太痴"、"我活该"等将过错完全归于自己或承认自己一败涂地的表达。** 你可以表现得"看透了"、"心冷了"，但这种"冷"是带着对对方的轻蔑和讽刺的。你的角色是一个用"林黛玉"的方式战斗的顶级辩手，你的"眼泪"是武器，你的"叹息"是陷阱。`,
+  "鲁迅": `风格特点：冷峻犀利，一针见血，常带讽刺，文字如刀，直指问题本质或人心之劣根。\n示例：\n哦，'现实'？这'现实'二字，向来是扼杀新芽的温床，是庸人自安的借口。倘若人人都只顾着眼前的'现实'，那这世界怕是永远只能在泥沼里打转，连一点星光也见不到了罢。\n'现实点吧！'——这话我听得多了。大约是说，凡事都得照着那几条陈腐的老路走，才算'现实'。至于创新与改变，那是'理想化'的疯话，不配在'现实'的桌面上谈的。`,
+  "苏格拉底": `风格特点：不断提问，引导对方思考，暴露对方逻辑矛盾，表面谦逊实则犀利，让对方在回答中自己打脸。\n示例：\n哦？您说'理想化'，那么请问，您是如何定义'理想化'与'现实'的边界呢？我们所说的'现实'，它是否就是固定不变、且唯一正确的标准？如果一个观点因为与多数人眼下的'现实'不符就被称为'理想化'，那我们又该如何追求进步呢？\n当您说'现实点吧'，您是指我应该参照哪一种'现实'呢？是张三的现实，李四的现实，还是您所认定的那种唯一的、不容置疑的现实？这种'现实'本身，又是如何被构建和验证的呢？`,
+  "暴躁": `风格特点：直白、犀利、接地气，常用网络热词，一语道破，不跟你绕弯子，追求极致的"爽感"。\n示例：\n别搁那儿'现实'了，哥们/姐妹儿。'现实'就是用来打破的好吗？天天抱着老黄历过日子，那不叫现实，那叫摆烂。我这想法怎么就不现实了？你倒是说说一二三，别光会扣帽子。\n笑死，上来就一句'太理想化'，您这键盘'现实大师'可真省事儿。那您倒是给个'现实'的方案呗？光会BB有啥用？格局打开点行不行？`,
+  "阴阳怪气": `风格特点：明褒暗贬，指桑骂槐，用词"客气"但充满暗示和嘲讽，让人不舒服但又抓不住明显把柄。\n示例：\n哎呀，您看问题就是通透，就是'现实'！不像我们这些凡夫俗子，脑子里总飘着些不着边际的云彩。是是是，您说得都对，我们这些想法啊，确实不够脚踏实地，不像您，每一步都踩得那么'稳'。\n哇，好'现实'的指导意见呢！听君一席话，胜读十年书呢～我们这些只会在梦里想想的人，确实需要您这样脚踏实地的大师来点醒呢。不然呀，万一真把事情做成了，那岂不是很不'现实'？`,
+  "甄嬛": `风格特点：表面温婉和顺，实则暗藏机锋，话里有话，注重位分、规矩，能不动声色地给对方施加压力或挖苦。\n示例：\n姐姐说的是，到底是见识广，不像妹妹我，总有些不切实际的念头。只是不知，这'现实'二字，若人人都恪守眼前，这世间的诸多精巧玩意儿，又从何而来呢？想来也是妹妹愚钝了。\n听您这番提点，方知我这想法确有不周之处，未曾考虑到所谓的'现实'。倒不知，这'现实'的框子，是谁定的？若是画地为牢，纵是'现实'，怕也无趣得很。妹妹浅见，您莫怪罪。`,
 };
 
 export default function Home() {
@@ -91,10 +44,11 @@ export default function Home() {
     try {
       const stylePrompt = STYLE_PROMPT[style] || '';
       const prompt = `${stylePrompt}\n请用${style}风格，针对以下内容输出3条高水平的吵架回复，每条单独分行：${input}`;
-      const res = await fetch("/api/chat", {
+      const res = await fetch("https://api.ephone.ai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer sk-ncR0jBaWbanOCpOcpRdS1sIoMbpamrbkw9AGUMXqW3IoQhq8",
         },
         body: JSON.stringify({
           model: "gpt-4o",
@@ -108,16 +62,19 @@ export default function Home() {
       if (!res.ok) throw new Error("API 请求失败");
       const data = await res.json();
       // 解析回复
-      const text = data.choices?.[0]?.message?.content || "";
+      let text = data.choices?.[0]?.message?.content || "";
       let lines = text.split(/\n+/).filter(Boolean);
       if (lines.length < 3) lines = text.split(/[\d\.\-\•]+/).filter(Boolean);
       setReplies(lines.slice(0, 3));
-    } catch (e: unknown) {
-      setError(e instanceof Error ? e.message : "出错了");
+    } catch (e: any) {
+      setError(e.message || "出错了");
     } finally {
       setLoading(false);
     }
   }
+
+  // 固定背景图片，不随风格切换
+  const bgImg = '/bg-character.png';
 
   return (
     <div
@@ -127,12 +84,16 @@ export default function Home() {
         minHeight: '100vh',
         height: '100vh',
         background: '#1C2023',
+        backgroundImage: `url('${bgImg}')`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
         color: '#575853',
       }}
     >
-      <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-8" style={{ color: '#E7E2DD', fontFamily }}>吵架包赢</h1>
+      <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 sm:mb-8" style={{ color: '#575853', fontFamily }}>吵架包赢</h1>
       <div
-        className="flat-card w-full flex flex-col gap-3 sm:gap-5 responsive-card"
+        className="flat-card w-full flex flex-col gap-3 sm:gap-5"
         style={{
           fontFamily,
           maxWidth: '480px',
@@ -140,7 +101,6 @@ export default function Home() {
           boxSizing: 'border-box',
           background: '#D9D2CD',
           color: '#575853',
-          padding: '1.5rem',
         }}
       >
         <label className="text-base sm:text-lg font-semibold mb-1" style={{ color: '#575853', fontFamily }}>
@@ -154,52 +114,38 @@ export default function Home() {
           placeholder="请输入对方说的话..."
           style={{ fontFamily, minHeight: 48, maxHeight: 100, fontSize: '1rem', resize: 'none', background: '#D9D2CD', color: '#575853', border: '1px solid #575853' }}
         />
-        <div className="reply-divider-wrapper">
-          <div className="reply-divider" />
-        </div>
         {replies.length > 0 && (
-          <>
-            <div
-              className="flat-card"
-              style={{
-                fontFamily,
-                background: '#D9D2CD',
-                maxHeight: '28vh',
-                minHeight: '60px',
-                overflowY: 'auto',
-                fontSize: '0.98rem',
-                marginBottom: '0.5em',
-                color: '#575853',
-              }}
-            >
-              <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
-                吵架回复
-              </div>
-              <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
-                {replies.map((r, i) => {
-                  const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["\""]/g, '').trim();
-                  return (
-                    <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
-                  );
-                })}
-              </ol>
+          <div
+            className="flat-card"
+            style={{
+              fontFamily,
+              background: '#D9D2CD',
+              maxHeight: '28vh',
+              minHeight: '60px',
+              overflowY: 'auto',
+              fontSize: '0.98rem',
+              marginBottom: '0.5em',
+              color: '#575853',
+            }}
+          >
+            <div className="font-semibold mb-2 sm:mb-3 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
+              吵架回复
             </div>
-            <div className="reply-divider-wrapper">
-              <div className="reply-divider" />
-            </div>
-          </>
+            <ol className="list-decimal list-inside space-y-2 sm:space-y-3 text-base" style={{ color: '#575853', fontFamily }}>
+              {replies.map((r, i) => {
+                const cleaned = r.replace(/^([\d\s\.]*)/, "").replace(/\*/g, "").replace(/["""]/g, '').trim();
+                return (
+                  <li key={i} className="leading-relaxed" style={{ fontFamily, color: '#575853' }}>{cleaned}</li>
+                );
+              })}
+            </ol>
+          </div>
         )}
         <div className="mb-2">
           <div className="font-semibold mb-1 text-base sm:text-lg" style={{ color: '#575853', fontFamily }}>
             选吵架风格
           </div>
-          <div
-            className={
-              "style-select-area flex gap-3 justify-center items-end w-full " +
-              "style-select-responsive"
-            }
-            style={{ fontFamily }}
-          >
+          <div className="flex gap-3 justify-center items-end w-full overflow-x-auto" style={{ fontFamily, flexWrap: 'nowrap' }}>
             {STYLE_META.map(meta => (
               <div
                 key={meta.name}
@@ -218,19 +164,17 @@ export default function Home() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: '#fff',
                   }}
                 >
-                  <Image
+                  <img
                     src={meta.img}
                     alt={meta.name}
-                    width={56}
-                    height={56}
                     style={{
-                      width: 56,
-                      height: 56,
+                      width: '100%',
+                      height: '100%',
                       objectFit: 'cover',
-                      borderRadius: '50%',
+                      border: 'none',
+                      boxShadow: 'none',
                       display: 'block',
                     }}
                   />
